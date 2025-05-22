@@ -5,7 +5,7 @@ purge_pnp_from_lhs <- function(x) {
     x
   } else if (is.call(x)) {
     if (identical(x[[1]], quote(`%P>%`))) {
-      x[[1]] <- quote(`%>%`)
+      x[[1]] <- quote(`|>`)
       purge_pnp_from_lhs(x)
     } else x <- as.call(lapply(x, purge_pnp_from_lhs))
   } else if (is.pairlist(x)) {
@@ -25,7 +25,7 @@ print_and_pipe <- function() {
                     paste(trimws(deparse(new_lhs)), collapse = " ")))
     if (is.data.frame(object)) object <- tibble::as_tibble(object)
     print(object)
-    my_call[[1]] <- quote(`%>%`)
+    my_call[[1]] <- quote(`|>`)
     eval(my_call, parent, parent)
   }
 }
@@ -48,7 +48,7 @@ print_and_pipe <- function() {
 #'
 #' @examples
 #'   if (!require(dplyr)) stop("Examples need dplyr to run")
-#'   mtcars %>%
+#'   mtcars |>
 #'     filter(am == 1) %P>%
 #'     select(qsec)
 #'

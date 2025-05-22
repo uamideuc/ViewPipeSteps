@@ -21,9 +21,9 @@
 #' @examples
 #' \donttest{
 #' if (!require(dplyr)) stop("Examples need dplyr to run")
-#' mtcars %>%
-#'   filter(am == 1) %>%
-#'   select(qsec) %>%
+#' mtcars |>
+#'   filter(am == 1) |>
+#'   select(qsec) |>
 #'   print_pipe_steps() -> result
 #'
 #' my_print_cmd <- c(
@@ -31,10 +31,10 @@
 #'   "skimr::skim_tee(data = ps%d)"
 #' )
 #'
-#' mtcars %>%
-#'   select(am, hp, mpg) %>%
-#'   group_by(am) %>%
-#'   print_pipe_steps(my_print_cmd, all = TRUE) %>%
+#' mtcars |>
+#'   select(am, hp, mpg) |>
+#'   group_by(am) |>
+#'   print_pipe_steps(my_print_cmd, all = TRUE) |>
 #'   summarize(
 #'     nobs = n(),
 #'     mean_hp = mean(hp),
